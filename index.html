@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rhoann U. Benedicto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 20px;
+            min-height: 100vh;
+        }
+
+        .profile-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+            color: white;
+            padding: 60px 50px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%);
+        }
+
+        .profile-pic {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            border: 6px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            object-fit: cover;
+            transition: all 0.4s ease;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.08) rotate(5deg);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .name {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .student-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 5px 20px rgba(72, 187, 120, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 60px 50px;
+        }
+
+        .intro {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 40px;
+            border-radius: 20px;
+            border-left: 6px solid #48bb78;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .intro h2 {
+            color: #2d3748;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .intro p {
+            font-size: 1.15rem;
+            color: #4a5568;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .hobbies-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .hobby-card {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-top: 5px solid #4299e1;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hobby-card:nth-child(2) { border-top-color: #ed8936; }
+        .hobby-card:nth-child(3) { border-top-color: #f56565; }
+        .hobby-card:nth-child(4) { border-top-color: #9f7aea; }
+
+        .hobby-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .hobby-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .hobby-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .hobby-desc {
+            color: #718096;
+            line-height: 1.6;
+        }
+
+        .likes-dislikes {
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #fed7d7;
+            margin-bottom: 40px;
+        }
+
+        .likes-dislikes h3 {
+            font-size: 1.6rem;
+            color: #c53030;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .likes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .like-item {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .like-emoji {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .like-text {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 1.1rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #a0aec0;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 40px 30px;
+            }
+            
+            .header {
+                padding: 50px 30px;
+            }
+            
+            .name {
+                font-size: 2.3rem;
+            }
+            
+            .profile-pic {
+                width: 130px;
+                height: 130px;
+            }
+            
+            .hobbies-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        <header class="header">
+            <img src="./rhoann.png" 
+                 alt="Rhoann U. Benedicto" 
+                 class="profile-pic">
+            
+            <h1 class="name">Rhoann U. Benedicto</h1>
+            <p class="subtitle">DIT 2-1 Student</p>
+            <div class="student-tag"> Polytechnic University of the Philippines - Sto. Tomas</div>
+        </header>
+
+        <div class="content">
+            <div class="intro">
+                <h2>Hi, I'm Rhoann! </h2>
+                <p>
+                    Born on November 21, 2005 in Manila, I'm a <strong>2nd year DIT student (2-1)</strong> 
+                    at PUP Sto. Tomas Campus. I love exploring technology through simple coding projects 
+                    while balancing my passion for music, acting, and adventure. Always curious, always learning!
+                </p>
+            </div>
+
+            <div class="hobbies-section">
+                <div class="hobby-card">
+                    <span class="hobby-icon">🎸</span>
+                    <h3 class="hobby-title">Playing Instruments</h3>
+                    <p class="hobby-desc">Strumming guitar and exploring melodies brings me peace and creativity.</p>
+                </div>
+
+                <div class="hobby-card">
+                    <span class="hobby-icon">💻</span>
+                    <h3 class="hobby-title">Simple Coding</h3>
+                    <p class="hobby-desc">Building small projects and solving problems with code – my tech playground!</p>
+                </div>
+
+                <div class="hobby-card">
+                    <span class="hobby-icon">🎭</span>
+                    <h3 class="hobby-title">Acting</h3>
+                    <p class="hobby-desc">Expressing emotions and telling stories through performance arts.</p>
+                </div>
+
+                <div class="hobby-card">
+                    <span class="hobby-icon">✈️</span>
+                    <h3 class="hobby-title">Traveling</h3>
+                    <p class="hobby-desc">Exploring new places, cultures, and experiences fuels my adventurous spirit.</p>
+                </div>
+            </div>
+
+            <div class="likes-dislikes">
+                <h3>❤️ What I Love & Dislike</h3>
+                <div class="likes-grid">
+                    <div class="like-item">
+                        <span class="like-emoji">🌶️</span>
+                        <span class="like-text">Spicy Food(ah sarap)</span>
+                    </div>
+                    <div class="like-item">
+                        <span class="like-emoji">🐶🐱</span>
+                        <span class="like-text">Dogs & Cats(Aki and cream🐱 along with mochi🐶)</span>
+                    </div>
+                    <div class="like-item">
+                        <span class="like-emoji">😰</span>
+                        <span class="like-text">Hot Weather (ayoko ikaw nalang)</span>
+                    </div>
+                    <div class="like-item">
+                        <span class="like-emoji">🥶</span>
+                        <span class="like-text">Cold Weather(ayoko ikaw nalang)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p> Let's connect! Open to collaborations, coding buddies, or just casual chats about life </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
