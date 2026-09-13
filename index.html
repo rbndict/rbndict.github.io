@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,26 +7,90 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
+        :root {
+            --navy-1: #0a192f;
+            --navy-2: #112240;
+            --glass: rgba(17, 34, 64, 0.55);
+            --glass-light: rgba(255, 255, 255, 0.65);
+            --stroke: rgba(100, 149, 237, 0.25);
+            --accent: #64ffda;
+            --accent-blue: #4a9eff;
+        }
+
+        [data-bs-theme="light"] {
+            --glass: rgba(255, 255, 255, 0.65);
+            --stroke: rgba(13, 40, 80, 0.15);
+        }
+
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0a192f 0%, #112240 50%, #0d2137 100%);
+            background-attachment: fixed;
             min-height: 100vh;
             padding: 60px 20px;
+            color: #cbd9ea;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        [data-bs-theme="light"] body {
+            background: linear-gradient(135deg, #dce9f7 0%, #bcd4ee 50%, #a9c6e6 100%);
+            color: #1a2f4a;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 15% 20%, rgba(74, 158, 255, 0.18) 0%, transparent 40%),
+                        radial-gradient(circle at 85% 80%, rgba(100, 255, 218, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glass-panel {
+            background: var(--glass);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--stroke);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(2, 12, 27, 0.5);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--stroke);
+            border-radius: 30px;
+            color: var(--accent);
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(74, 158, 255, 0.35);
+            color: var(--accent);
         }
 
         .profile-card {
             max-width: 900px;
             margin: 0 auto;
-            border-radius: 25px;
+            position: relative;
+            z-index: 1;
             overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .profile-header {
-            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
-            color: white;
-            padding: 60px 40px;
+            padding: 70px 40px 50px;
             text-align: center;
+            border-bottom: 1px solid var(--stroke);
+            background: linear-gradient(180deg, rgba(74, 158, 255, 0.08) 0%, transparent 100%);
         }
 
         .profile-pic {
@@ -34,115 +98,157 @@
             height: 160px;
             border-radius: 50%;
             object-fit: cover;
-            border: 6px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 4px solid rgba(74, 158, 255, 0.4);
+            box-shadow: 0 15px 40px rgba(2, 12, 27, 0.6), 0 0 0 8px rgba(74, 158, 255, 0.08);
             transition: transform 0.4s ease, border-color 0.4s ease;
         }
 
         .profile-pic:hover {
-            transform: scale(1.08);
-            border-color: rgba(255, 255, 255, 0.6);
+            transform: scale(1.06);
+            border-color: var(--accent);
         }
 
         .student-tag {
-            background: linear-gradient(135deg, #48bb78, #38a169);
-            color: white;
-            padding: 10px 25px;
+            background: rgba(74, 158, 255, 0.15);
+            border: 1px solid rgba(74, 158, 255, 0.35);
+            color: var(--accent-blue);
+            padding: 10px 26px;
             border-radius: 30px;
             font-weight: 600;
             display: inline-block;
-        }
-
-        .repo-card {
-            border: none;
-            border-radius: 18px;
-            border-top: 5px solid #4299e1;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: 100%;
-        }
-
-        .repo-card:nth-child(2) { border-top-color: #ed8936; }
-        .repo-card:nth-child(3) { border-top-color: #f56565; }
-        .repo-card:nth-child(4) { border-top-color: #9f7aea; }
-
-        .repo-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(8px);
         }
 
         .section-title {
             font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 1.5rem;
+            color: var(--accent);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 1.75rem;
             text-align: center;
         }
 
         .intro-box {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            border-left: 6px solid #48bb78;
-            border-radius: 20px;
             padding: 40px;
-            margin-bottom: 40px;
+            margin-bottom: 45px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .repo-card {
+            background: var(--glass);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--stroke);
+            border-radius: 18px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            height: 100%;
+            color: inherit;
+        }
+
+        .repo-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(74, 158, 255, 0.6);
+            box-shadow: 0 20px 50px rgba(74, 158, 255, 0.2);
+        }
+
+        .repo-card .repo-title {
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        [data-bs-theme="light"] .repo-card .repo-title {
+            color: #1660c9;
+        }
+
+        .repo-card .repo-desc {
+            color: #8fa8c5;
+            font-size: 0.95rem;
+        }
+
+        [data-bs-theme="light"] .repo-card .repo-desc {
+            color: #45618a;
         }
 
         .profile-footer {
             text-align: center;
-            padding: 30px 0 0;
-            color: #a0aec0;
+            padding-top: 35px;
+            color: #8fa8c5;
+            border-top: 1px solid var(--stroke);
+        }
+
+        [data-bs-theme="light"] .profile-footer {
+            color: #45618a;
+        }
+
+        .name-title {
+            color: #f0f6fc;
+        }
+
+        [data-bs-theme="light"] .name-title {
+            color: #102a43;
+        }
+
+        .accent-text {
+            color: var(--accent);
         }
     </style>
 </head>
 <body>
-    <div class="profile-card bg-white">
+    <button class="theme-toggle" id="themeToggle" type="button">
+        <i class="bi bi-sun" id="themeIcon"></i>
+    </button>
+
+    <div class="glass-panel profile-card">
         <header class="profile-header">
-            <img src="./rhoann.png" alt="Rhoann U. Benedicto" class="profile-pic mb-3">
-            <h1 class="display-5 fw-bold mb-2">Rhoann U. Benedicto</h1>
-            <p class="lead opacity-75 mb-3">DIT 3-1 Student</p>
+            <img src="./rhoann.png" alt="Rhoann U. Benedicto" class="profile-pic mb-4">
+            <h1 class="display-5 fw-bold mb-2 name-title">Rhoann U. Benedicto</h1>
+            <p class="lead mb-3" style="color: #8fa8c5;">DIT 3-1 Student</p>
             <span class="student-tag">Polytechnic University of the Philippines - Sto. Tomas</span>
         </header>
 
         <main class="p-5">
-            <section class="intro-box text-center mb-5">
-                <h2 class="h3 fw-semibold mb-3">Hi, I'm Rhoann</h2>
-                <p class="lead text-secondary mb-0">
-                    Born on November 21, 2005 in Manila, I'm a <strong>2nd year DIT student (3-1)</strong>
+            <section class="glass-panel intro-box mb-5">
+                <h2 class="section-title">About Me</h2>
+                <p class="lead mb-0">
+                    Born on November 21, 2005 in Manila, I'm a <strong class="accent-text">2nd year DIT student (3-1)</strong>
                     at PUP Sto. Tomas Campus. I love exploring technology through simple coding projects
                     while balancing my passion for music, acting, and adventure. Always curious, always learning.
                 </p>
             </section>
 
-            <section class="mb-5">
-                <h2 class="section-title h3">My Repositories</h2>
+            <section class="mb-4">
+                <h2 class="section-title">My Repositories</h2>
                 <div class="row g-4">
                     <div class="col-md-6">
                         <a href="https://rbndict.github.io/AO2.github.io/" target="_blank" rel="noopener" class="text-decoration-none">
-                            <div class="card repo-card shadow-sm p-4">
-                                <h3 class="h5 fw-bold text-dark mb-2"><i class="bi bi-github me-2"></i>AO2.github.io</h3>
-                                <p class="text-secondary mb-0">A web project hosted on GitHub Pages.</p>
+                            <div class="card repo-card p-4">
+                                <h3 class="h5 repo-title mb-2"><i class="bi bi-github me-2"></i>AO2.github.io</h3>
+                                <p class="repo-desc mb-0">A web project hosted on GitHub Pages.</p>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-6">
                         <a href="https://rbndict.github.io/shonen_giants/" target="_blank" rel="noopener" class="text-decoration-none">
-                            <div class="card repo-card shadow-sm p-4">
-                                <h3 class="h5 fw-bold text-dark mb-2"><i class="bi bi-github me-2"></i>Shonen Giants</h3>
-                                <p class="text-secondary mb-0">A web project hosted on GitHub Pages.</p>
+                            <div class="card repo-card p-4">
+                                <h3 class="h5 repo-title mb-2"><i class="bi bi-github me-2"></i>Shonen Giants</h3>
+                                <p class="repo-desc mb-0">A web project hosted on GitHub Pages.</p>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-6">
                         <a href="https://rbndict.github.io/midterm-tax-Revenue/" target="_blank" rel="noopener" class="text-decoration-none">
-                            <div class="card repo-card shadow-sm p-4">
-                                <h3 class="h5 fw-bold text-dark mb-2"><i class="bi bi-github me-2"></i>Midterm Tax Revenue</h3>
-                                <p class="text-secondary mb-0">A web project hosted on GitHub Pages.</p>
+                            <div class="card repo-card p-4">
+                                <h3 class="h5 repo-title mb-2"><i class="bi bi-github me-2"></i>Midterm Tax Revenue</h3>
+                                <p class="repo-desc mb-0">A web project hosted on GitHub Pages.</p>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-6">
                         <a href="https://github.com/rbndict/Janopo-Rural-Waterworks" target="_blank" rel="noopener" class="text-decoration-none">
-                            <div class="card repo-card shadow-sm p-4">
-                                <h3 class="h5 fw-bold text-dark mb-2"><i class="bi bi-github me-2"></i>Janopo Rural Waterworks</h3>
-                                <p class="text-secondary mb-0">A repository on GitHub.</p>
+                            <div class="card repo-card p-4">
+                                <h3 class="h5 repo-title mb-2"><i class="bi bi-github me-2"></i>Janopo Rural Waterworks</h3>
+                                <p class="repo-desc mb-0">A repository on GitHub.</p>
                             </div>
                         </a>
                     </div>
@@ -156,5 +262,16 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const toggle = document.getElementById('themeToggle');
+        const icon = document.getElementById('themeIcon');
+        const root = document.documentElement;
+
+        toggle.addEventListener('click', () => {
+            const next = root.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+            root.setAttribute('data-bs-theme', next);
+            icon.className = next === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
+        });
+    </script>
 </body>
 </html>
