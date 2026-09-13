@@ -1,319 +1,413 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rhoann U. Benedicto</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.7;
-            color: #2d3748;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 60px 20px;
-            min-height: 100vh;
-        }
-
-        .profile-card {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 25px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .header {
-            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
-            color: white;
-            padding: 60px 50px;
-            text-align: center;
-            position: relative;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%);
-        }
-
-        .profile-pic {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            margin: 0 auto 25px;
-            border: 6px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            object-fit: cover;
-            transition: all 0.4s ease;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-        }
-
-        .profile-pic:hover {
-            transform: scale(1.08) rotate(5deg);
-            border-color: rgba(255, 255, 255, 0.6);
-        }
-
-        .name {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .subtitle {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .student-tag {
-            display: inline-block;
-            background: linear-gradient(135deg, #48bb78, #38a169);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 1rem;
-            box-shadow: 0 5px 20px rgba(72, 187, 120, 0.4);
-            position: relative;
-            z-index: 1;
-        }
-
-        .content {
-            padding: 60px 50px;
-        }
-
-        .intro {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            padding: 40px;
-            border-radius: 20px;
-            border-left: 6px solid #48bb78;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .intro h2 {
-            color: #2d3748;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            font-weight: 600;
-        }
-
-        .intro p {
-            font-size: 1.15rem;
-            color: #4a5568;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        .hobbies-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .hobby-card {
-            background: white;
-            padding: 30px;
-            border-radius: 18px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            border-top: 5px solid #4299e1;
-            transition: all 0.3s ease;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hobby-card:nth-child(2) { border-top-color: #ed8936; }
-        .hobby-card:nth-child(3) { border-top-color: #f56565; }
-        .hobby-card:nth-child(4) { border-top-color: #9f7aea; }
-
-        .hobby-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        .hobby-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .hobby-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 15px;
-        }
-
-        .hobby-desc {
-            color: #718096;
-            line-height: 1.6;
-        }
-
-        .likes-dislikes {
-            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
-            padding: 40px;
-            border-radius: 20px;
-            border: 2px solid #fed7d7;
-            margin-bottom: 40px;
-        }
-
-        .likes-dislikes h3 {
-            font-size: 1.6rem;
-            color: #c53030;
-            margin-bottom: 30px;
-            text-align: center;
-            font-weight: 700;
-        }
-
-        .likes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-        }
-
-        .like-item {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .like-emoji {
-            font-size: 2.5rem;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .like-text {
-            font-weight: 600;
-            color: #2d3748;
-            font-size: 1.1rem;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 40px 0;
-            color: #a0aec0;
-            font-size: 1.1rem;
-        }
-
-        @media (max-width: 768px) {
-            .content {
-                padding: 40px 30px;
-            }
-            
-            .header {
-                padding: 50px 30px;
-            }
-            
-            .name {
-                font-size: 2.3rem;
-            }
-            
-            .profile-pic {
-                width: 130px;
-                height: 130px;
-            }
-            
-            .hobbies-section {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rhoann U. Benedicto — IT Professional &amp; Web Developer</title>
+<meta name="description" content="Portfolio of Rhoann U. Benedicto, an Information Technology student at PUP – Sto. Tomas focused on front-end web development, clean code, and reliable deployment.">
+<meta name="author" content="Rhoann U. Benedicto">
+<meta name="theme-color" content="#0a192f">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rhoann U. Benedicto — IT Professional &amp; Web Developer">
+<meta property="og:description" content="Front-end web development, clean code, and reliable deployment — building toward a professional IT career.">
+<meta property="og:url" content="https://rbndict.github.io/">
+<meta property="og:image" content="https://rbndict.github.io/rhoann.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/png" href="rhoann.png">
+<script>
+(function () {
+  var t;
+  try { t = localStorage.getItem('theme'); } catch (e) { t = null; }
+  if (t !== 'dark' && t !== 'light') {
+    t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+  document.documentElement.setAttribute('data-bs-theme', t);
+  if ('IntersectionObserver' in window) document.documentElement.classList.add('js');
+})();
+</script>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}.progress-bar{width:var(--level,0%)!important}</style></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
 </head>
-<body>
-    <div class="profile-card">
-        <header class="header">
-            <img src="./rhoann.png" 
-                 alt="Rhoann U. Benedicto" 
-                 class="profile-pic">
-            
-            <h1 class="name">Rhoann U. Benedicto</h1>
-            <p class="subtitle">DIT 3-1 Student</p>
-            <div class="student-tag"> Polytechnic University of the Philippines - Sto. Tomas</div>
-        </header>
+<body data-bs-spy="scroll" data-bs-target="#navMenu" tabindex="0">
+<a class="skip-link" href="#main">Skip to content</a>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<div class="scroll-progress" aria-hidden="true"><span id="scrollProgressBar"></span></div>
 
-        <div class="content">
-            <div class="intro">
-                <h2>Hi, I'm Rhoann! </h2>
-                <p>
-                    Born on November 21, 2005 in Manila, I'm a <strong>3rd year DIT student (3-1)</strong> 
-                    at PUP Sto. Tomas Campus. I love exploring technology through simple coding projects 
-                    while balancing my passion for music, acting, and adventure. Always curious, always learning!
-                </p>
-            </div>
-
-            <div class="hobbies-section">
-                <div class="hobby-card">
-                    <span class="hobby-icon">🎸</span>
-                    <h3 class="hobby-title">Playing Instruments</h3>
-                    <p class="hobby-desc">Strumming guitar and exploring melodies brings me peace and creativity.</p>
-                </div>
-
-                <div class="hobby-card">
-                    <span class="hobby-icon">💻</span>
-                    <h3 class="hobby-title">Simple Coding</h3>
-                    <p class="hobby-desc">Building small projects and solving problems with code – my tech playground!</p>
-                </div>
-
-                <div class="hobby-card">
-                    <span class="hobby-icon">🎭</span>
-                    <h3 class="hobby-title">Acting</h3>
-                    <p class="hobby-desc">Expressing emotions and telling stories through performance arts.</p>
-                </div>
-
-                <div class="hobby-card">
-                    <span class="hobby-icon">✈️</span>
-                    <h3 class="hobby-title">Traveling</h3>
-                    <p class="hobby-desc">Exploring new places, cultures, and experiences fuels my adventurous spirit.</p>
-                </div>
-            </div>
-
-            <div class="likes-dislikes">
-                <h3>❤️ What I Love & Dislike</h3>
-                <div class="likes-grid">
-                    <div class="like-item">
-                        <span class="like-emoji">🌶️</span>
-                        <span class="like-text">Spicy Food(ah sarap)</span>
-                    </div>
-                    <div class="like-item">
-                        <span class="like-emoji">🐶🐱</span>
-                        <span class="like-text">Dogs & Cats(Aki and cream🐱 along with mochi🐶)</span>
-                    </div>
-                    <div class="like-item">
-                        <span class="like-emoji">😰</span>
-                        <span class="like-text">Hot Weather (ayoko ikaw nalang)</span>
-                    </div>
-                    <div class="like-item">
-                        <span class="like-emoji">🥶</span>
-                        <span class="like-text">Cold Weather(ayoko ikaw nalang)</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer">
-                <p> Let's connect! Open to collaborations, coding buddies, or just casual chats about life </p>
-            </div>
-        </div>
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNav" aria-label="Primary">
+  <div class="container">
+    <a class="navbar-brand brand" href="#home"><span class="brand-accent">~$</span>rbndict<span class="brand-cursor" aria-hidden="true">_</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="toggler-line"></span>
+      <span class="toggler-line"></span>
+      <span class="toggler-line"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark or light theme"><i class="bi bi-sun" id="themeIcon"></i></button>
+        </li>
+      </ul>
     </div>
+  </div>
+</nav>
+
+<main id="main">
+<section id="home" class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <div class="hero-copy">
+          <span class="hero-status reveal"><span class="pulse-dot" aria-hidden="true"></span>Open to internships &amp; entry-level IT roles</span>
+          <p class="hero-greeting reveal" style="--d:.05s">Hi, I'm</p>
+          <h1 class="hero-name reveal" style="--d:.1s">Rhoann U. Benedicto</h1>
+          <p class="hero-typed reveal" style="--d:.15s" aria-label="IT professional and web developer.">
+            <span class="typed-prefix" aria-hidden="true">&gt;</span>
+            <span class="typed-text" id="typed" aria-hidden="true">IT Professional</span>
+            <span class="type-caret" aria-hidden="true"></span>
+          </p>
+          <p class="hero-lead reveal" style="--d:.2s">A <strong>Digital Information Technology</strong> student at <strong>PUP – Sto. Tomas</strong> building clean, reliable web projects — and preparing for a professional career in IT.</p>
+          <div class="d-flex flex-wrap gap-3 mb-4 reveal" style="--d:.25s">
+            <a class="btn btn-gradient btn-lg" href="#projects"><i class="bi bi-rocket-takeoff me-2" aria-hidden="true"></i>View Projects</a>
+            <a class="btn btn-outline-glass btn-lg" href="#contact"><i class="bi bi-send me-2" aria-hidden="true"></i>Contact Me</a>
+          </div>
+          <div class="hero-socials d-flex gap-3 reveal" style="--d:.3s">
+            <a class="social-btn" href="mailto:benedictorhoann1921@gmail.com" aria-label="Email me" title="Email"><i class="bi bi-envelope-fill"></i></a>
+            <a class="social-btn" href="https://github.com/rbndict" target="_blank" rel="noopener" aria-label="GitHub profile" title="GitHub"><i class="bi bi-github"></i></a>
+            <a class="social-btn" href="https://www.instagram.com/rbndict/?hl=en" target="_blank" rel="noopener" aria-label="Instagram profile" title="Instagram"><i class="bi bi-instagram"></i></a>
+            <a class="social-btn" href="https://www.facebook.com/Itsmerb21" target="_blank" rel="noopener" aria-label="Facebook profile" title="Facebook"><i class="bi bi-facebook"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="hero-visual reveal mx-auto" style="--d:.2s">
+          <div class="photo-ring">
+            <img class="hero-photo" src="rhoann.png" alt="Portrait of Rhoann U. Benedicto" width="320" height="320">
+          </div>
+          <span class="float-badge badge-1" aria-hidden="true"><i class="bi bi-filetype-html"></i>HTML &amp; CSS</span>
+          <span class="float-badge badge-2" aria-hidden="true"><i class="bi bi-filetype-js"></i>JavaScript</span>
+          <span class="float-badge badge-3" aria-hidden="true"><i class="bi bi-github"></i>Git &amp; GitHub</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="scroll-hint" href="#about" aria-label="Scroll to the About section"><span>scroll</span><i class="bi bi-chevron-double-down" aria-hidden="true"></i></a>
+</section>
+<section id="about" class="section">
+  <div class="container">
+    <h2 class="section-heading reveal"><span class="num">01.</span>About Me</h2>
+    <div class="row g-4 g-lg-5 align-items-start">
+      <div class="col-lg-7">
+        <div class="about-text reveal">
+          <p>I'm <strong>Rhoann U. Benedicto</strong>, a <strong>Diploma in Information Technology</strong> student at the <strong>Polytechnic University of the Philippines – Sto. Tomas Campus</strong>. I focus on front-end web development, writing clean code, and turning classroom lessons into real, working projects.</p>
+          <p>I enjoy the full journey of every build — planning the structure, writing the code, fixing the bugs, and shipping it live on GitHub Pages. Curiosity keeps me exploring new tools, and discipline keeps me finishing what I start.</p>
+          <p>As graduation approaches, I'm looking for internships, entry-level IT roles, and collaborations where I can contribute, keep learning, and deliver real value to a team. <a href="#contact">My inbox is always open.</a></p>
+          <div class="interests d-flex flex-wrap gap-2 mt-4">
+            <span class="interests-label">Interests</span>
+            <span class="chip"><i class="bi bi-music-note-beamed" aria-hidden="true"></i>Music</span>
+            <span class="chip"><i class="bi bi-camera-reels" aria-hidden="true"></i>Acting</span>
+            <span class="chip"><i class="bi bi-cpu" aria-hidden="true"></i>Tech &amp; Gadgets</span>
+            <span class="chip"><i class="bi bi-signpost-split" aria-hidden="true"></i>Adventure</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="card glass fact-card reveal">
+          <div class="card-body p-4">
+            <h3 class="card-label">Quick Facts</h3>
+            <div class="fact"><i class="bi bi-mortarboard-fill" aria-hidden="true"></i><div><span class="fact-label">Program</span><span class="fact-value">Diploma in Information Technology (DIT 3-1)</span></div></div>
+            <div class="fact"><i class="bi bi-buildings" aria-hidden="true"></i><div><span class="fact-label">School</span><span class="fact-value">PUP – Sto. Tomas Campus</span></div></div>
+            <div class="fact"><i class="bi bi-calendar-heart" aria-hidden="true"></i><div><span class="fact-label">Birthday</span><span class="fact-value">November 21, 2005</span></div></div>
+            <div class="fact"><i class="bi bi-geo-alt-fill" aria-hidden="true"></i><div><span class="fact-label">Hometown</span><span class="fact-value">Manila, Philippines</span></div></div>
+            <div class="fact"><i class="bi bi-briefcase-fill" aria-hidden="true"></i><div><span class="fact-label">Status</span><span class="fact-value">Open to internships &amp; entry-level roles</span></div></div>
+          </div>
+        </div>
+        <div class="card glass code-card reveal mt-4" style="--d:.12s">
+          <div class="code-head" aria-hidden="true">
+            <span class="code-dots"><span></span><span></span><span></span></span>
+            <span>profile.js</span>
+          </div>
+          <pre class="code-body"><code><span class="c-com">// an IT professional, in object form</span>
+<span class="c-kw">const</span> <span class="c-var">rhoann</span> = {
+  name: <span class="c-str">'Rhoann U. Benedicto'</span>,
+  role: <span class="c-str">'IT Professional'</span>,
+  focus: <span class="c-str">'Front-End Development'</span>,
+  stack: [<span class="c-str">'HTML'</span>, <span class="c-str">'CSS'</span>, <span class="c-str">'JavaScript'</span>],
+  learning: [<span class="c-str">'Python'</span>, <span class="c-str">'SQL'</span>],
+  status: <span class="c-str">'open to opportunities'</span>,
+  hireable: <span class="c-kw">() =&gt;</span> <span class="c-bool">true</span>
+};</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="skills" class="section">
+  <div class="container">
+    <h2 class="section-heading reveal"><span class="num">02.</span>Skills &amp; Services</h2>
+    <div class="row g-4 align-items-start">
+      <div class="col-lg-5">
+        <div class="card glass skill-card reveal">
+          <div class="card-body p-4">
+            <h3 class="card-label"><i class="bi bi-bar-chart-line" aria-hidden="true"></i>Core Skills</h3>
+            <div class="bar">
+              <div class="bar-head"><span class="bar-name">HTML &amp; CSS</span><span class="bar-num" data-level="85">85%</span></div>
+              <div class="progress" aria-hidden="true"><div class="progress-bar" data-level="85" style="--d:.05s; --level:85%"></div></div>
+            </div>
+            <div class="bar">
+              <div class="bar-head"><span class="bar-name">JavaScript</span><span class="bar-num" data-level="72">72%</span></div>
+              <div class="progress" aria-hidden="true"><div class="progress-bar" data-level="72" style="--d:.15s; --level:72%"></div></div>
+            </div>
+            <div class="bar">
+              <div class="bar-head"><span class="bar-name">Python</span><span class="bar-num" data-level="65">65%</span></div>
+              <div class="progress" aria-hidden="true"><div class="progress-bar" data-level="65" style="--d:.25s; --level:65%"></div></div>
+            </div>
+            <div class="bar">
+              <div class="bar-head"><span class="bar-name">SQL &amp; Databases</span><span class="bar-num" data-level="60">60%</span></div>
+              <div class="progress" aria-hidden="true"><div class="progress-bar" data-level="60" style="--d:.35s; --level:60%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card glass skill-card reveal mt-4" style="--d:.12s">
+          <div class="card-body p-4">
+            <h3 class="card-label"><i class="bi bi-tools" aria-hidden="true"></i>Tools &amp; Platforms</h3>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="chip">Git &amp; GitHub</span>
+              <span class="chip">GitHub Pages</span>
+              <span class="chip">VS Code</span>
+              <span class="chip">Bootstrap</span>
+              <span class="chip">Responsive Design</span>
+              <span class="chip">Debugging</span>
+            </div>
+            <h3 class="card-label mt-4"><i class="bi bi-people" aria-hidden="true"></i>Soft Skills</h3>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="chip">Teamwork</span>
+              <span class="chip">Communication</span>
+              <span class="chip">Adaptability</span>
+              <span class="chip">Time Management</span>
+              <span class="chip">Creativity</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-4">
+          <div class="col-sm-6">
+            <div class="card glass service-card h-100 reveal">
+              <div class="card-body p-4">
+                <span class="icon-tile"><i class="bi bi-window-sidebar" aria-hidden="true"></i></span>
+                <h3>Front-End Development</h3>
+                <p>Semantic, accessible interfaces built with HTML, CSS, and JavaScript.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card glass service-card h-100 reveal" style="--d:.08s">
+              <div class="card-body p-4">
+                <span class="icon-tile"><i class="bi bi-phone" aria-hidden="true"></i></span>
+                <h3>Responsive Web Design</h3>
+                <p>Layouts that work smoothly on phones, tablets, and desktops.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card glass service-card h-100 reveal" style="--d:.16s">
+              <div class="card-body p-4">
+                <span class="icon-tile"><i class="bi bi-git" aria-hidden="true"></i></span>
+                <h3>Version Control &amp; Deployment</h3>
+                <p>Git, GitHub, and publishing sites with GitHub Pages.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card glass service-card h-100 reveal" style="--d:.24s">
+              <div class="card-body p-4">
+                <span class="icon-tile"><i class="bi bi-database" aria-hidden="true"></i></span>
+                <h3>Data &amp; Databases</h3>
+                <p>SQL fundamentals for storing, querying, and managing data.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="projects" class="section">
+  <div class="container">
+    <h2 class="section-heading reveal"><span class="num">03.</span>Featured Projects</h2>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <article class="card glass project-card h-100 reveal">
+          <div class="card-body p-4 d-flex flex-column">
+            <div class="project-top">
+              <span class="icon-tile"><i class="bi bi-globe2" aria-hidden="true"></i></span>
+              <div class="d-flex gap-2">
+                <a class="icon-link" href="https://rbndict.github.io/AO2.github.io/" target="_blank" rel="noopener" title="Open live demo" aria-label="Open the AO2.github.io live demo"><i class="bi bi-box-arrow-up-right"></i></a>
+                <a class="icon-link" href="https://github.com/rbndict/AO2.github.io" target="_blank" rel="noopener" title="View source code" aria-label="View AO2.github.io source on GitHub"><i class="bi bi-github"></i></a>
+              </div>
+            </div>
+            <h3 class="project-title">AO2.github.io</h3>
+            <p class="project-desc">An electronics-device web activity built as a school requirement — designed, coded, and hosted live on GitHub Pages.</p>
+            <div class="mt-auto d-flex flex-wrap gap-2"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">GitHub Pages</span></div>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-6">
+        <article class="card glass project-card h-100 reveal" style="--d:.08s">
+          <div class="card-body p-4 d-flex flex-column">
+            <div class="project-top">
+              <span class="icon-tile"><i class="bi bi-stars" aria-hidden="true"></i></span>
+              <div class="d-flex gap-2">
+                <a class="icon-link" href="https://rbndict.github.io/shonen_giants/" target="_blank" rel="noopener" title="Open live demo" aria-label="Open the Shonen Giants live demo"><i class="bi bi-box-arrow-up-right"></i></a>
+                <a class="icon-link" href="https://github.com/rbndict/shonen_giants" target="_blank" rel="noopener" title="View source code" aria-label="View Shonen Giants source on GitHub"><i class="bi bi-github"></i></a>
+              </div>
+            </div>
+            <h3 class="project-title">Shonen Giants</h3>
+            <p class="project-desc">A fan-themed tribute site celebrating the giants of shonen anime — custom layouts, pages, and styling built from scratch.</p>
+            <div class="mt-auto d-flex flex-wrap gap-2"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-6">
+        <article class="card glass project-card h-100 reveal" style="--d:.16s">
+          <div class="card-body p-4 d-flex flex-column">
+            <div class="project-top">
+              <span class="icon-tile"><i class="bi bi-cash-coin" aria-hidden="true"></i></span>
+              <div class="d-flex gap-2">
+                <a class="icon-link" href="https://rbndict.github.io/midterm-tax-Revenue/" target="_blank" rel="noopener" title="Open live demo" aria-label="Open the Midterm Tax Revenue live demo"><i class="bi bi-box-arrow-up-right"></i></a>
+                <a class="icon-link" href="https://github.com/rbndict/midterm-tax-Revenue" target="_blank" rel="noopener" title="View source code" aria-label="View Midterm Tax Revenue source on GitHub"><i class="bi bi-github"></i></a>
+              </div>
+            </div>
+            <h3 class="project-title">Midterm Tax Revenue</h3>
+            <p class="project-desc">A midterm coursework project that processes and presents tax revenue data right in the browser.</p>
+            <div class="mt-auto d-flex flex-wrap gap-2"><span class="tag">JavaScript</span><span class="tag">DOM</span><span class="tag">Data Handling</span></div>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-6">
+        <article class="card glass project-card h-100 reveal" style="--d:.24s">
+          <div class="card-body p-4 d-flex flex-column">
+            <div class="project-top">
+              <span class="icon-tile"><i class="bi bi-droplet-fill" aria-hidden="true"></i></span>
+              <div class="d-flex gap-2">
+                <a class="icon-link" href="https://github.com/rbndict/Janopo-Rural-Waterworks" target="_blank" rel="noopener" title="View source code" aria-label="View Janopo Rural Waterworks source on GitHub"><i class="bi bi-github"></i></a>
+              </div>
+            </div>
+            <h3 class="project-title">Janopo Rural Waterworks</h3>
+            <p class="project-desc">A front-end build for a rural waterworks district — page structure, design, and version control on GitHub.</p>
+            <div class="mt-auto d-flex flex-wrap gap-2"><span class="tag">Web Design</span><span class="tag">Front-End</span><span class="tag">GitHub</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+    <div class="text-center mt-5 reveal">
+      <a class="btn btn-outline-glass" href="https://github.com/rbndict?tab=repositories" target="_blank" rel="noopener"><i class="bi bi-github me-2" aria-hidden="true"></i>Explore all repositories</a>
+    </div>
+  </div>
+</section>
+<section id="experience" class="section">
+  <div class="container">
+    <h2 class="section-heading reveal"><span class="num">04.</span>Experience &amp; Education</h2>
+    <div class="timeline">
+      <article class="timeline-item reveal">
+        <div class="card glass timeline-card">
+          <div class="card-body p-4">
+            <span class="badge rounded-pill badge-now">In progress</span>
+            <h3 class="mt-3">Diploma in Information Technology</h3>
+            <p class="timeline-org">Polytechnic University of the Philippines – Sto. Tomas</p>
+            <ul>
+              <li>Core coursework in programming, web technologies, and databases (DIT 3-1).</li>
+              <li>Building and deploying real projects on GitHub Pages.</li>
+              <li>Preparing for internships and on-the-job training.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+      <article class="timeline-item reveal" style="--d:.12s">
+        <div class="card glass timeline-card">
+          <div class="card-body p-4">
+            <span class="badge rounded-pill badge-next">Next up</span>
+            <h3 class="mt-3">First Chapter in the IT Industry</h3>
+            <p class="timeline-org">After graduation</p>
+            <p>Seeking internships or entry-level roles in web development or IT support — somewhere I can solve real problems, learn from a team, and grow fast. <a href="#contact">Say hello <i class="bi bi-arrow-right-short" aria-hidden="true"></i></a></p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <div class="container contact-wrap">
+    <h2 class="section-heading reveal"><span class="num">05.</span>Get In Touch</h2>
+    <p class="contact-lead reveal">The fastest way to reach me is email — I read it daily and reply quickly. Instagram and Facebook work too.</p>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card glass contact-card h-100 reveal">
+          <div class="card-body p-4 d-flex align-items-center gap-3">
+            <span class="contact-icon mail" aria-hidden="true"><i class="bi bi-envelope-fill"></i></span>
+            <a class="contact-link" href="mailto:benedictorhoann1921@gmail.com">
+              <span class="contact-label">Email</span>
+              <span class="contact-value">benedictorhoann1921@gmail.com</span>
+            </a>
+            <button class="copy-btn" id="copyEmail" type="button" data-copy="benedictorhoann1921@gmail.com" title="Copy email address" aria-label="Copy email address"><i class="bi bi-clipboard"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <a class="card glass contact-card h-100 reveal" style="--d:.1s" href="https://www.instagram.com/rbndict/?hl=en" target="_blank" rel="noopener">
+          <div class="card-body p-4 d-flex align-items-center gap-3">
+            <span class="contact-icon insta" aria-hidden="true"><i class="bi bi-instagram"></i></span>
+            <span class="contact-link"><span class="contact-label">Instagram</span><span class="contact-value">@rbndict</span></span>
+            <i class="bi bi-box-arrow-up-right contact-arrow" aria-hidden="true"></i>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4">
+        <a class="card glass contact-card h-100 reveal" style="--d:.2s" href="https://www.facebook.com/Itsmerb21" target="_blank" rel="noopener">
+          <div class="card-body p-4 d-flex align-items-center gap-3">
+            <span class="contact-icon fb" aria-hidden="true"><i class="bi bi-facebook"></i></span>
+            <span class="contact-link"><span class="contact-label">Facebook</span><span class="contact-value">Itsmerb21</span></span>
+            <i class="bi bi-box-arrow-up-right contact-arrow" aria-hidden="true"></i>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container text-center">
+    <p class="footer-line mb-1">Designed and built by <strong>Rhoann U. Benedicto</strong></p>
+    <p class="footer-meta mb-0">© <span id="year">2026</span> · rbndict.github.io · HTML, CSS, JavaScript &amp; Bootstrap · <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a></p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Back to top"><i class="bi bi-arrow-up" aria-hidden="true"></i></button>
+
+<div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+  <div class="toast toast-glass" id="toast" role="status" aria-live="polite" aria-atomic="true" data-bs-delay="2200">
+    <div class="d-flex align-items-center">
+      <div class="toast-body"><i class="bi bi-check-circle-fill me-2" aria-hidden="true"></i>Email copied to clipboard</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js" defer></script>
 </body>
 </html>
