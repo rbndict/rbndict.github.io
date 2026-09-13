@@ -1,319 +1,160 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rhoann U. Benedicto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.7;
-            color: #2d3748;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 60px 20px;
             min-height: 100vh;
+            padding: 60px 20px;
         }
 
         .profile-card {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
             border-radius: 25px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
             overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .header {
+        .profile-header {
             background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
             color: white;
-            padding: 60px 50px;
+            padding: 60px 40px;
             text-align: center;
-            position: relative;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%);
         }
 
         .profile-pic {
             width: 160px;
             height: 160px;
             border-radius: 50%;
-            margin: 0 auto 25px;
+            object-fit: cover;
             border: 6px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            object-fit: cover;
-            transition: all 0.4s ease;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            transition: transform 0.4s ease, border-color 0.4s ease;
         }
 
         .profile-pic:hover {
-            transform: scale(1.08) rotate(5deg);
+            transform: scale(1.08);
             border-color: rgba(255, 255, 255, 0.6);
         }
 
-        .name {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .subtitle {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-        }
-
         .student-tag {
-            display: inline-block;
             background: linear-gradient(135deg, #48bb78, #38a169);
             color: white;
             padding: 10px 25px;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 1rem;
-            box-shadow: 0 5px 20px rgba(72, 187, 120, 0.4);
-            position: relative;
-            z-index: 1;
+            display: inline-block;
         }
 
-        .content {
-            padding: 60px 50px;
-        }
-
-        .intro {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            padding: 40px;
-            border-radius: 20px;
-            border-left: 6px solid #48bb78;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .intro h2 {
-            color: #2d3748;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            font-weight: 600;
-        }
-
-        .intro p {
-            font-size: 1.15rem;
-            color: #4a5568;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        .hobbies-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .hobby-card {
-            background: white;
-            padding: 30px;
+        .repo-card {
+            border: none;
             border-radius: 18px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             border-top: 5px solid #4299e1;
-            transition: all 0.3s ease;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
         }
 
-        .hobby-card:nth-child(2) { border-top-color: #ed8936; }
-        .hobby-card:nth-child(3) { border-top-color: #f56565; }
-        .hobby-card:nth-child(4) { border-top-color: #9f7aea; }
+        .repo-card:nth-child(2) { border-top-color: #ed8936; }
+        .repo-card:nth-child(3) { border-top-color: #f56565; }
+        .repo-card:nth-child(4) { border-top-color: #9f7aea; }
 
-        .hobby-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        .repo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .hobby-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .hobby-title {
-            font-size: 1.4rem;
+        .section-title {
             font-weight: 700;
             color: #2d3748;
-            margin-bottom: 15px;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
 
-        .hobby-desc {
-            color: #718096;
-            line-height: 1.6;
-        }
-
-        .likes-dislikes {
-            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
-            padding: 40px;
+        .intro-box {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-left: 6px solid #48bb78;
             border-radius: 20px;
-            border: 2px solid #fed7d7;
+            padding: 40px;
             margin-bottom: 40px;
         }
 
-        .likes-dislikes h3 {
-            font-size: 1.6rem;
-            color: #c53030;
-            margin-bottom: 30px;
+        .profile-footer {
             text-align: center;
-            font-weight: 700;
-        }
-
-        .likes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-        }
-
-        .like-item {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .like-emoji {
-            font-size: 2.5rem;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .like-text {
-            font-weight: 600;
-            color: #2d3748;
-            font-size: 1.1rem;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 40px 0;
+            padding: 30px 0 0;
             color: #a0aec0;
-            font-size: 1.1rem;
-        }
-
-        @media (max-width: 768px) {
-            .content {
-                padding: 40px 30px;
-            }
-            
-            .header {
-                padding: 50px 30px;
-            }
-            
-            .name {
-                font-size: 2.3rem;
-            }
-            
-            .profile-pic {
-                width: 130px;
-                height: 130px;
-            }
-            
-            .hobbies-section {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
 <body>
-    <div class="profile-card">
-        <header class="header">
-            <img src="./rhoann.png" 
-                 alt="Rhoann U. Benedicto" 
-                 class="profile-pic">
-            
-            <h1 class="name">Rhoann U. Benedicto</h1>
-            <p class="subtitle">DIT 2-1 Student</p>
-            <div class="student-tag"> Polytechnic University of the Philippines - Sto. Tomas</div>
+    <div class="profile-card bg-white">
+        <header class="profile-header">
+            <img src="./rhoann.png" alt="Rhoann U. Benedicto" class="profile-pic mb-3">
+            <h1 class="display-5 fw-bold mb-2">Rhoann U. Benedicto</h1>
+            <p class="lead opacity-75 mb-3">DIT 3-1 Student</p>
+            <span class="student-tag">Polytechnic University of the Philippines - Sto. Tomas</span>
         </header>
 
-        <div class="content">
-            <div class="intro">
-                <h2>Hi, I'm Rhoann! </h2>
-                <p>
-                    Born on November 21, 2005 in Manila, I'm a <strong>2nd year DIT student (2-1)</strong> 
-                    at PUP Sto. Tomas Campus. I love exploring technology through simple coding projects 
-                    while balancing my passion for music, acting, and adventure. Always curious, always learning!
+        <main class="p-5">
+            <section class="intro-box text-center mb-5">
+                <h2 class="h3 fw-semibold mb-3">Hi, I'm Rhoann</h2>
+                <p class="lead text-secondary mb-0">
+                    Born on November 21, 2005 in Manila, I'm a <strong>2nd year DIT student (3-1)</strong>
+                    at PUP Sto. Tomas Campus. I love exploring technology through simple coding projects
+                    while balancing my passion for music, acting, and adventure. Always curious, always learning.
                 </p>
-            </div>
+            </section>
 
-            <div class="hobbies-section">
-                <div class="hobby-card">
-                    <span class="hobby-icon">🎸</span>
-                    <h3 class="hobby-title">Playing Instruments</h3>
-                    <p class="hobby-desc">Strumming guitar and exploring melodies brings me peace and creativity.</p>
-                </div>
-
-                <div class="hobby-card">
-                    <span class="hobby-icon">💻</span>
-                    <h3 class="hobby-title">Simple Coding</h3>
-                    <p class="hobby-desc">Building small projects and solving problems with code – my tech playground!</p>
-                </div>
-
-                <div class="hobby-card">
-                    <span class="hobby-icon">🎭</span>
-                    <h3 class="hobby-title">Acting</h3>
-                    <p class="hobby-desc">Expressing emotions and telling stories through performance arts.</p>
-                </div>
-
-                <div class="hobby-card">
-                    <span class="hobby-icon">✈️</span>
-                    <h3 class="hobby-title">Traveling</h3>
-                    <p class="hobby-desc">Exploring new places, cultures, and experiences fuels my adventurous spirit.</p>
-                </div>
-            </div>
-
-            <div class="likes-dislikes">
-                <h3>❤️ What I Love & Dislike</h3>
-                <div class="likes-grid">
-                    <div class="like-item">
-                        <span class="like-emoji">🌶️</span>
-                        <span class="like-text">Spicy Food(ah sarap)</span>
+            <section class="mb-5">
+                <h2 class="section-title h3">My Repositories</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <a href="https://rbndict.github.io/AO2.github.io/" target="_blank" rel="noopener" class="text-decoration-none">
+                            <div class="card repo-card shadow-sm p-4">
+                                <h3 class="h5 fw-bold text-dark mb-2"><i class="bi bi-github me-2"></i>AO2.github.io</h3>
+                                <p class="text-secondary mb-0">A web project hosted on GitHub Pages.</p>
+                            </div>
+                        </a>
                     </div>
-                    <div class="like-item">
-                        <span class="like-emoji">🐶🐱</span>
-                        <span class="like-text">Dogs & Cats(Aki and cream🐱 along with mochi🐶)</span>
+                    <div class="col-md-6">
+                        <a href="https://rbndict.github.io/shonen_giants/" target="_blank" rel="noopener" class="text-decoration-none">
+                            <div class="card repo-card shadow-sm p-4">
+                                <h3 class="h5 fw-bold text-dark mb-2"><i class="bi bi-github me-2"></i>Shonen Giants</h3>
+                                <p class="text-secondary mb-0">A web project hosted on GitHub Pages.</p>
+                            </div>
+                        </a>
                     </div>
-                    <div class="like-item">
-                        <span class="like-emoji">😰</span>
-                        <span class="like-text">Hot Weather (ayoko ikaw nalang)</span>
+                    <div class="col-md-6">
+                        <a href="https://rbndict.github.io/midterm-tax-Revenue/" target="_blank" rel="noopener" class="text-decoration-none">
+                            <div class="card repo-card shadow-sm p-4">
+                                <h3 class="h5 fw-bold text-dark mb-2"><i class="bi bi-github me-2"></i>Midterm Tax Revenue</h3>
+                                <p class="text-secondary mb-0">A web project hosted on GitHub Pages.</p>
+                            </div>
+                        </a>
                     </div>
-                    <div class="like-item">
-                        <span class="like-emoji">🥶</span>
-                        <span class="like-text">Cold Weather(ayoko ikaw nalang)</span>
+                    <div class="col-md-6">
+                        <a href="https://github.com/rbndict/Janopo-Rural-Waterworks" target="_blank" rel="noopener" class="text-decoration-none">
+                            <div class="card repo-card shadow-sm p-4">
+                                <h3 class="h5 fw-bold text-dark mb-2"><i class="bi bi-github me-2"></i>Janopo Rural Waterworks</h3>
+                                <p class="text-secondary mb-0">A repository on GitHub.</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="footer">
-                <p> Let's connect! Open to collaborations, coding buddies, or just casual chats about life </p>
-            </div>
-        </div>
+            <footer class="profile-footer">
+                <p class="mb-0">Let's connect. Open to collaborations, coding buddies, or just casual chats about life.</p>
+            </footer>
+        </main>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
