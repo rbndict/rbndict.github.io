@@ -12,7 +12,10 @@ Live at: <https://rbndict.github.io/>
 - Google Fonts: Poppins + JetBrains Mono
 - Hosted on GitHub Pages
 
-## Files
+## Deployment
+
+- Live site: <https://rbndict.github.io/>
+- Pages settings (choose branch, custom domain, etc.): <https://github.com/rbndict/Unburdened-Space/settings/pages>
 
 | File | Purpose |
 | --- | --- |
