@@ -766,6 +766,279 @@ html:not(.js) .progress-bar { width: var(--level, 0%); }
 
 .timeline-card p { font-size: 0.93rem; color: var(--muted); margin: 0; }
 
+
+/* =========================================================
+   Mini game — Alien Invaders (vanilla JS + SVG, see game.js)
+   ========================================================= */
+.game-intro {
+  max-width: 660px;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+.game-card { padding: 0; overflow: hidden; }
+
+.game-hud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--stroke);
+  font-family: var(--font-mono);
+}
+
+.hud-stats { display: flex; flex-wrap: wrap; gap: 0.75rem 1.75rem; }
+
+.hud-item { display: flex; flex-direction: column; gap: 0.1rem; }
+
+.hud-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hud-value { font-size: 1.05rem; font-weight: 600; color: var(--heading); }
+
+.hud-lives { display: inline-flex; align-items: center; gap: 0.35rem; padding-top: 0.2rem; }
+
+.life-icon { width: 20px; height: 19px; }
+.life-icon.off { opacity: 0.15; filter: grayscale(1); }
+
+.hud-actions { display: flex; gap: 0.45rem; }
+
+.game-btn {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--stroke);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  font-size: 1rem;
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s var(--ease);
+}
+
+.game-btn:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+
+/* The stage keeps its own deep-space look in both themes */
+.game-stage {
+  position: relative;
+  outline: none;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(74, 158, 255, 0.16), transparent 55%),
+    linear-gradient(180deg, #071426 0%, #0a192f 55%, #0d2137 100%);
+}
+
+.game-stage.is-playing { touch-action: none; cursor: crosshair; }
+
+#gameSvg { display: block; width: 100%; height: auto; }
+
+.star {
+  fill: #cfe3ff;
+  animation: star-twinkle var(--dur, 3s) ease-in-out var(--del, 0s) infinite alternate;
+}
+
+@keyframes star-twinkle {
+  from { opacity: 0.15; }
+  to { opacity: 0.9; }
+}
+
+.defense-line {
+  stroke: rgba(255, 93, 143, 0.4);
+  stroke-width: 1.5;
+  stroke-dasharray: 7 9;
+}
+
+.player-shot { filter: drop-shadow(0 0 4px rgba(100, 255, 218, 0.8)); }
+
+.thruster {
+  transform-origin: 24px 40px;
+  animation: game-thrust 0.16s ease-in-out infinite alternate;
+}
+
+@keyframes game-thrust {
+  from { transform: scaleY(0.55); opacity: 0.65; }
+  to { transform: scaleY(1.2); opacity: 1; }
+}
+
+.invuln { animation: game-blink 0.18s steps(2, end) infinite; }
+
+@keyframes game-blink {
+  50% { opacity: 0.25; }
+}
+
+.fx-boom {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: game-boom 0.5s ease-out forwards;
+}
+
+@keyframes game-boom {
+  from { transform: scale(0.3); opacity: 1; }
+  to { transform: scale(1.3); opacity: 0; }
+}
+
+.score-pop {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  transform-box: fill-box;
+  animation: game-float 0.85s ease-out forwards;
+}
+
+@keyframes game-float {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-26px); }
+}
+
+.wave-banner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.wave-banner.show { animation: game-banner 1.25s var(--ease) forwards; }
+
+.wave-banner span {
+  font-family: var(--font-mono);
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: #eaf4ff;
+  text-shadow: 0 0 26px rgba(74, 158, 255, 0.95);
+}
+
+@keyframes game-banner {
+  0% { opacity: 0; transform: scale(0.85); }
+  15% { opacity: 1; transform: scale(1); }
+  75% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.06); }
+}
+
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  background: rgba(5, 13, 26, 0.74);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.game-overlay:not(.show) { display: none; }
+
+.overlay-card {
+  max-width: 430px;
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+}
+
+.overlay-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: #64ffda;
+  margin: 0;
+}
+
+.overlay-title {
+  font-size: clamp(1.7rem, 5vw, 2.4rem);
+  font-weight: 700;
+  color: #f0f6fc;
+  margin: 0;
+}
+
+.overlay-title span {
+  background: linear-gradient(120deg, #4a9eff, #64ffda);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.overlay-text { color: #b8c9de; font-size: 0.92rem; margin: 0; }
+
+.overlay-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 1.1rem;
+  font-size: 0.78rem;
+  color: #8fa8c5;
+}
+
+.overlay-controls kbd {
+  padding: 0.1rem 0.45rem;
+  border: 1px solid rgba(143, 168, 197, 0.4);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: rgba(17, 34, 64, 0.8);
+  color: #d9e8f9;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.overlay-high { font-size: 0.8rem; color: #8fa8c5; margin: 0; }
+.overlay-high strong { color: #eaf4ff; }
+
+.overlay-score { font-family: var(--font-mono); color: #b8c9de; margin: 0; }
+.overlay-score strong { color: #eaf4ff; font-size: 1.05rem; }
+
+.new-best {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.8rem;
+  border: 1px solid rgba(255, 209, 102, 0.45);
+  border-radius: 999px;
+  color: #ffd166;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.new-best[hidden] { display: none; }
+
+.game-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1.1rem;
+  border-top: 1px solid var(--stroke);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.game-foot a { color: var(--accent-2); text-decoration: none; }
+.game-foot a:hover { color: var(--accent); }
+
+@media (max-width: 575.98px) {
+  .game-hud { justify-content: center; }
+  .hud-stats { gap: 0.6rem 1.1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star, .thruster, .invuln { animation: none; }
+  .wave-banner.show { animation-duration: 0.01s; }
+}
 .contact-wrap { max-width: 860px; }
 
 .contact-lead { max-width: 56ch; margin-bottom: 2.6rem; color: var(--muted); }
