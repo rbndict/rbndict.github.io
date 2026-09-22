@@ -1,9 +1,3 @@
-/* ============================================================
-   rbndict.github.io — Alien Invaders 2.1
-   Vanilla canvas engine: fixed-timestep updates, hit-stop,
-   diver aliens, aimed fire, combo scoring, shockwaves,
-   power-up magnet, death sequence. No libraries.
-   ============================================================ */
 (function () {
   'use strict';
 
@@ -39,22 +33,21 @@
   const touchRight = document.getElementById('touchRight');
   const touchFire = document.getElementById('touchFire');
 
-  /* Virtual stage constants */
   const W = 640;
   const H = 480;
-  const DEFENSE_Y = 408;           // invasion line
-  const SHIP_Y = H - 44;           // ship row
+  const DEFENSE_Y = 408;
+  const SHIP_Y = H - 44;
   const SHIP_W = 44;
-  const SHIP_SPEED = 380;          // px/s
-  const BULLET_SPEED = 620;        // px/s
-  const BULLET_COOLDOWN = 0.24;    // s between shots
+  const SHIP_SPEED = 380;
+  const BULLET_SPEED = 620;
+  const BULLET_COOLDOWN = 0.24;
   const MAX_BULLETS = 5;
   const COLS = 8;
   const ROWS = 4;
   const CELL_X = 58;
   const CELL_Y = 42;
-  const STEP_DROP = 16;            // formation drop per edge turn
-  const MAX_STEP = 1 / 60;         // fixed timestep (s) — frame-rate independent
+  const STEP_DROP = 16;
+  const MAX_STEP = 1 / 60;
 
   const ALIEN_TYPES = [
     { w: 40, h: 26, points: 30, color: '#ff5d8f' },
@@ -72,8 +65,7 @@
 
   const MARCH = [110, 98, 87.3, 78];
 
-  /* ---------- Run state ---------- */
-  let state = 'idle';              // idle | playing | paused | over
+  let state = 'idle';
   let score = 0;
   let high = 0;
   let hiAtStart = 0;
@@ -86,9 +78,9 @@
   let bullets = [];
   let lasers = [];
   let drops = [];
-  let parts = [];                  // particle debris
-  let floats = [];                 // floating score text
-  let rings = [];                  // v2.1: expanding shockwaves
+  let parts = [];
+  let floats = [];
+  let rings = [];
   let stars = [];
 
   let ufo = null;
@@ -120,14 +112,13 @@
   let flash = 0;
   let slowmo = 0;
 
-  /* v2.1 juice state */
-  let hitStop = 0;                 // freeze frames on kills
-  let deathT = 0;                  // death-sequence timer
-  let dying = false;               // ship destruction in progress
-  let acc = 0;                     // fixed-timestep accumulator
-  let now = 0;                     // running clock (star twinkle, thruster)
-  let trail = [];                  // engine trail points
-  let comboBest = 0;               // best combo this run
+  let hitStop = 0;
+  let deathT = 0;
+  let dying = false;
+  let acc = 0;
+  let now = 0;
+  let trail = [];
+  let comboBest = 0;
 
   let rafId = null;
   let lastTs = 0;
@@ -312,9 +303,7 @@
       addScore(bonus);
       floats.push({ x: ufo.x, y: 34, text: '+' + bonus, color: '#ffd166', life: 0.9 });
       burst(ufo.x, 34, 18, '#ffd166');
-      ring(ufo.x, 34, '#ffd166', 56);
-      hitStop = Math.max(hitStop, 0.07);   // v2.1: bonus kill feels weighty
-      shake = Math.max(shake, 6);
+      shake = Math.max(shake, 5);
     }
     ufo = null;
     resetUfoClock();
@@ -431,15 +420,11 @@
     lives = 3;
     combo = 0;
     comboTimer = 0;
-    comboBest = 0;
     cooldown = 0;
     invuln = 0;
     rapid = 0;
     spread = 0;
     shield = false;
-    dying = false;
-    hitStop = 0;
-    acc = 0;
     left = right = fireKey = touchFireOn = false;
     touchDir = 0;
     pointerDown = false;
@@ -447,8 +432,6 @@
     ship.x = W / 2;
     parts = [];
     floats = [];
-    rings = [];
-    trail = [];
     drops = [];
     clearShots();
     clearTimeout(waveTimer);
@@ -484,7 +467,6 @@
 
   function gameOver(reason) {
     if (state === 'over') return;
-    dying = false;
     state = 'over';
     stopLoop();
     stage.classList.remove('is-playing');
@@ -555,22 +537,10 @@
   function update(dt) {
     now += dt;
 
-    /* v2.1: death sequence — shots keep flying and FX keep
-       animating while the wreck settles, then the card appears. */
+    /* v2.1: death sequence — world keeps animating while the
+       wreck settles, then the game-over card appears. */
     if (dying) {
       deathT -= dt;
-      for (let i = bullets.length - 1; i >= 0; i--) {
-        const b = bullets[i];
-        b.y -= BULLET_SPEED * dt;
-        b.x += b.vx * dt;
-        if (b.y < -20 || b.x < -10 || b.x > W + 10) bullets.splice(i, 1);
-      }
-      for (let i = lasers.length - 1; i >= 0; i--) {
-        const l = lasers[i];
-        l.y += l.v * dt;
-        l.x += (l.vx || 0) * dt;
-        if (l.y > H + 20) lasers.splice(i, 1);
-      }
       updateFx(dt);
       if (deathT <= 0) { dying = false; gameOver('destroyed'); }
       return;
@@ -1136,14 +1106,6 @@
   bindHold(touchRight, () => { touchDir = 1; }, () => { if (touchDir > 0) touchDir = 0; });
   bindHold(touchFire, () => { touchFireOn = true; }, () => { touchFireOn = false; });
 
-  /* v2.1: reveal on-screen controls the moment a real touch is seen
-     (belt-and-braces with the CSS pointer media query) */
-  function firstTouch(e) {
-    document.body.classList.add('has-touch');
-    document.removeEventListener('touchstart', firstTouch);
-  }
-  document.addEventListener('touchstart', firstTouch, { passive: true });
-
   document.addEventListener('visibilitychange', () => { if (document.hidden) pauseGame(); });
   window.addEventListener('blur', () => pauseGame());
   if ('IntersectionObserver' in window) {
@@ -1162,15 +1124,4 @@
   syncPauseBtn();
   draw();
   showOverlay('start');
-
-  /* Debug/QA hook (harmless in production; used by automated tests) */
-  window.__rbnGame = {
-    get state() { return state; },
-    get score() { return score; },
-    get wave() { return wave; },
-    get lives() { return lives; },
-    start: startGame,
-    pause: pauseGame,
-    resume: resumeGame
-  };
 })();
