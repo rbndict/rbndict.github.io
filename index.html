@@ -53,6 +53,7 @@
         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
         <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
         <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#github">GitHub</a></li>
         <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
         <li class="nav-item"><a class="nav-link" href="#game">Mini Game</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
@@ -67,7 +68,7 @@
 <main id="main">
 <section id="home" class="hero">
   <div class="container">
-    <div class="row align-items-center g-5">
+    <div class="row align-items-center g-4 g-lg-5">
       <div class="col-lg-7">
         <div class="hero-copy">
           <span class="hero-status reveal"><span class="pulse-dot" aria-hidden="true"></span>Open to internships &amp; entry-level IT roles</span>
@@ -105,6 +106,7 @@
   </div>
   <a class="scroll-hint" href="#about" aria-label="Scroll to the About section"><span>scroll</span><i class="bi bi-chevron-double-down" aria-hidden="true"></i></a>
 </section>
+
 <section id="about" class="section">
   <div class="container">
     <h2 class="section-heading reveal"><span class="num">01.</span>About Me</h2>
@@ -154,6 +156,7 @@
     </div>
   </div>
 </section>
+
 <section id="skills" class="section">
   <div class="container">
     <h2 class="section-heading reveal"><span class="num">02.</span>Skills &amp; Services</h2>
@@ -245,6 +248,7 @@
     </div>
   </div>
 </section>
+
 <section id="projects" class="section">
   <div class="container">
     <h2 class="section-heading reveal"><span class="num">03.</span>Featured Projects</h2>
@@ -272,7 +276,7 @@
               <span class="icon-tile"><i class="bi bi-stars" aria-hidden="true"></i></span>
               <div class="d-flex gap-2">
                 <a class="icon-link" href="https://rbndict.github.io/shonen_giants/" target="_blank" rel="noopener" title="Open live demo" aria-label="Open the Shonen Giants live demo"><i class="bi bi-box-arrow-up-right"></i></a>
-                <a class="icon-link" href="https://github.com/rbndict/shonen_giants" target="_blank" rel="noopener" title="View source code" aria-label="View Shonen Giants source on GitHub"><i class="bi bi-github"></i></a>
+                <a class="icon-link" href="https://github.com/rbndict/shonen_giants" target="_blank" rel="noopener" title="View Shonen Giants source on GitHub"><i class="bi bi-github"></i></a>
               </div>
             </div>
             <h3 class="project-title">Shonen Giants</h3>
@@ -288,7 +292,7 @@
               <span class="icon-tile"><i class="bi bi-cash-coin" aria-hidden="true"></i></span>
               <div class="d-flex gap-2">
                 <a class="icon-link" href="https://rbndict.github.io/midterm-tax-Revenue/" target="_blank" rel="noopener" title="Open live demo" aria-label="Open the Midterm Tax Revenue live demo"><i class="bi bi-box-arrow-up-right"></i></a>
-                <a class="icon-link" href="https://github.com/rbndict/midterm-tax-Revenue" target="_blank" rel="noopener" title="View source code" aria-label="View Midterm Tax Revenue source on GitHub"><i class="bi bi-github"></i></a>
+                <a class="icon-link" href="https://github.com/rbndict/midterm-tax-Revenue" target="_blank" rel="noopener" title="View Midterm Tax Revenue source on GitHub"><i class="bi bi-github"></i></a>
               </div>
             </div>
             <h3 class="project-title">Midterm Tax Revenue</h3>
@@ -318,9 +322,49 @@
     </div>
   </div>
 </section>
+
+<section id="github" class="section">
+  <div class="container">
+    <h2 class="section-heading reveal"><span class="num">04.</span>GitHub Stats</h2>
+    <p class="game-intro reveal">Live numbers pulled straight from my <a href="https://github.com/rbndict" target="_blank" rel="noopener">GitHub profile</a>.</p>
+    <div class="row g-4 justify-content-center align-items-stretch">
+      <div class="col-md-6 col-lg-5 reveal">
+        <div class="card glass stats-card h-100">
+          <div class="card-body p-4">
+            <h3 class="card-label"><i class="bi bi-graph-up-arrow" aria-hidden="true"></i>Profile</h3>
+            <div class="stats-grid">
+              <div class="stat-item"><i class="bi bi-journals" aria-hidden="true"></i><span class="stat-num" id="statRepos">–</span><span class="stat-name">Public repos</span></div>
+              <div class="stat-item"><i class="bi bi-star" aria-hidden="true"></i><span class="stat-num" id="statStars">–</span><span class="stat-name">Stars earned</span></div>
+              <div class="stat-item"><i class="bi bi-person-plus" aria-hidden="true"></i><span class="stat-num" id="statFollowers">–</span><span class="stat-name">Followers</span></div>
+              <div class="stat-item"><i class="bi bi-fork" aria-hidden="true"></i><span class="stat-num" id="statForks">–</span><span class="stat-name">Forks</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-5 reveal" style="--d:.08s">
+        <div class="card glass stats-card h-100">
+          <div class="card-body p-4">
+            <h3 class="card-label"><i class="bi bi-code-slash" aria-hidden="true"></i>Top Languages</h3>
+            <div class="lang-list" id="langList"><span class="stat-loading">Fetching data…</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-10 reveal" style="--d:.16s">
+        <div class="card glass stats-card">
+          <div class="card-body p-4">
+            <h3 class="card-label"><i class="bi bi-activity" aria-hidden="true"></i>Recent Activity</h3>
+            <ul class="activity-list" id="activityList"><li class="stat-loading">Fetching data…</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="stats-note reveal" style="--d:.2s">Numbers are fetched live from the GitHub API when this page loads.</p>
+  </div>
+</section>
+
 <section id="experience" class="section">
   <div class="container">
-    <h2 class="section-heading reveal"><span class="num">04.</span>Experience &amp; Education</h2>
+    <h2 class="section-heading reveal"><span class="num">05.</span>Experience &amp; Education</h2>
     <div class="timeline">
       <article class="timeline-item reveal">
         <div class="card glass timeline-card">
@@ -350,21 +394,17 @@
   </div>
 </section>
 
-<!-- ============================================================
-     Mini game: Alien Invaders — vanilla JS + hand-drawn SVG sprites
-     Game logic lives in game.js; the sprites are the <symbol> defs.
-     ============================================================ -->
 <section id="game" class="section">
   <div class="container">
-    <h2 class="section-heading reveal"><span class="num">05.</span>Mini Game</h2>
-    <p class="game-intro reveal">Take a break and defend the base — <strong>Alien Invaders</strong> is a tiny arcade built from scratch with vanilla JavaScript and hand-drawn SVG sprites. No engines, no libraries.</p>
+    <h2 class="section-heading reveal"><span class="num">06.</span>Mini Game</h2>
+    <p class="game-intro reveal">Take a break and defend the base — <strong>Alien Invaders 2.1</strong>: fixed-timestep canvas engine, diving aliens, aimed fire, combos, power-up magnet and screen juice. Keyboard &amp; touch supported.</p>
     <div class="card glass game-card reveal" style="--d:.08s">
       <div class="game-hud">
         <div class="hud-stats">
           <div class="hud-item"><span class="hud-label">Score</span><span class="hud-value" id="hudScore">0</span></div>
           <div class="hud-item"><span class="hud-label">High</span><span class="hud-value" id="hudHigh">0</span></div>
           <div class="hud-item"><span class="hud-label">Wave</span><span class="hud-value" id="hudWave">1</span></div>
-          <div class="hud-item"><span class="hud-label">Lives</span><span class="hud-lives" id="hudLives"><svg class="life-icon" viewBox="0 0 48 44" aria-hidden="true"><use href="#spr-ship"></use></svg><svg class="life-icon" viewBox="0 0 48 44" aria-hidden="true"><use href="#spr-ship"></use></svg><svg class="life-icon" viewBox="0 0 48 44" aria-hidden="true"><use href="#spr-ship"></use></svg></span></div>
+          <div class="hud-item"><span class="hud-label">Lives</span><span class="hud-lives" id="hudLives" aria-label="Lives remaining"><i class="bi bi-triangle-fill life-icon"></i><i class="bi bi-triangle-fill life-icon"></i><i class="bi bi-triangle-fill life-icon"></i></span></div>
         </div>
         <div class="hud-actions">
           <button class="game-btn" id="btnSound" type="button" aria-label="Toggle game sound" aria-pressed="true" title="Sound"><i class="bi bi-volume-up-fill" aria-hidden="true"></i></button>
@@ -373,55 +413,18 @@
         </div>
       </div>
       <div class="game-stage" id="gameStage" tabindex="0" aria-label="Alien Invaders mini game. Press Enter to start.">
-        <svg id="gameSvg" viewBox="0 0 640 480" role="img" aria-hidden="true" focusable="false">
-          <defs>
-            <symbol id="spr-ship" viewBox="0 0 48 44" overflow="visible">
-              <path class="thruster" d="M20.5 39L24 47l3.5-8z" fill="#64ffda"/>
-              <path d="M17 27L3 41l4 2 10-9z" fill="#4a9eff" stroke="#2a4a6b" stroke-width="1.2"/>
-              <path d="M31 27l14 14-4 2-10-9z" fill="#4a9eff" stroke="#2a4a6b" stroke-width="1.2"/>
-              <path d="M24 2c4 6 7 13 7 22v10H17V24c0-9 3-16 7-22z" fill="#d9e8f9" stroke="#2a4a6b" stroke-width="1.5" stroke-linejoin="round"/>
-              <ellipse cx="24" cy="18" rx="4.5" ry="6.5" fill="#64ffda"/>
-              <rect x="18" y="34" width="5" height="6" rx="1" fill="#35597f"/>
-              <rect x="25" y="34" width="5" height="6" rx="1" fill="#35597f"/>
-            </symbol>
-            <symbol id="spr-alien-a" viewBox="0 0 40 32"><path d="M16 0h8v4h-8zM12 4h16v4h-16zM8 8h24v4h-24zM4 12h8v4h-8zM16 12h8v4h-8zM28 12h8v4h-8zM4 16h32v4h-32zM12 20h4v4h-4zM24 20h4v4h-4zM8 24h4v4h-4zM16 24h8v4h-8zM28 24h4v4h-4zM4 28h4v4h-4zM12 28h4v4h-4zM24 28h4v4h-4zM32 28h4v4h-4z"/></symbol>
-            <symbol id="spr-alien-a2" viewBox="0 0 40 32"><path d="M16 0h8v4h-8zM12 4h16v4h-16zM8 8h24v4h-24zM4 12h8v4h-8zM16 12h8v4h-8zM28 12h8v4h-8zM4 16h32v4h-32zM8 20h4v4h-4zM16 20h8v4h-8zM28 20h4v4h-4zM4 24h4v4h-4zM32 24h4v4h-4zM8 28h4v4h-4zM28 28h4v4h-4z"/></symbol>
-            <symbol id="spr-alien-b" viewBox="0 0 44 32"><path d="M8 0h4v4h-4zM32 0h4v4h-4zM12 4h4v4h-4zM28 4h4v4h-4zM8 8h28v4h-28zM4 12h8v4h-8zM16 12h12v4h-12zM32 12h8v4h-8zM0 16h44v4h-44zM0 20h4v4h-4zM8 20h28v4h-28zM40 20h4v4h-4zM0 24h4v4h-4zM8 24h4v4h-4zM32 24h4v4h-4zM40 24h4v4h-4zM12 28h8v4h-8zM24 28h8v4h-8z"/></symbol>
-            <symbol id="spr-alien-b2" viewBox="0 0 44 32"><path d="M8 0h4v4h-4zM32 0h4v4h-4zM0 4h4v4h-4zM12 4h4v4h-4zM28 4h4v4h-4zM40 4h4v4h-4zM0 8h4v4h-4zM8 8h28v4h-28zM40 8h4v4h-4zM0 12h12v4h-12zM16 12h12v4h-12zM32 12h12v4h-12zM0 16h44v4h-44zM4 20h36v4h-36zM8 24h4v4h-4zM32 24h4v4h-4zM4 28h4v4h-4zM36 28h4v4h-4z"/></symbol>
-            <symbol id="spr-alien-c" viewBox="0 0 48 32"><path d="M16 0h16v4h-16zM4 4h40v4h-40zM0 8h48v4h-48zM0 12h12v4h-12zM20 12h8v4h-8zM36 12h12v4h-12zM0 16h48v4h-48zM12 20h8v4h-8zM28 20h8v4h-8zM8 24h8v4h-8zM20 24h8v4h-8zM32 24h8v4h-8zM0 28h8v4h-8zM40 28h8v4h-8z"/></symbol>
-            <symbol id="spr-alien-c2" viewBox="0 0 48 32"><path d="M16 0h16v4h-16zM4 4h40v4h-40zM0 8h48v4h-48zM0 12h12v4h-12zM20 12h8v4h-8zM36 12h12v4h-12zM0 16h48v4h-48zM8 20h12v4h-12zM28 20h12v4h-12zM4 24h8v4h-8zM20 24h8v4h-8zM36 24h8v4h-8zM8 28h8v4h-8zM32 28h8v4h-8z"/></symbol>
-            <symbol id="spr-ufo" viewBox="0 0 48 22" overflow="visible">
-              <path d="M24 2c5 0 9 4 9 8H15c0-4 4-8 9-8z" fill="#ffd166"/>
-              <ellipse cx="24" cy="12" rx="21" ry="6.5" fill="#ff6b6b"/>
-              <circle cx="10" cy="13.5" r="1.8" fill="#ffe08a"/>
-              <circle cx="18" cy="13.5" r="1.8" fill="#ffe08a"/>
-              <circle cx="30" cy="13.5" r="1.8" fill="#ffe08a"/>
-              <circle cx="38" cy="13.5" r="1.8" fill="#ffe08a"/>
-            </symbol>
-            <symbol id="spr-bullet" viewBox="0 0 8 16"><path d="M4 0l3.2 5v7.5c0 1.8-1.4 3-3.2 3s-3.2-1.2-3.2-3V5L4 0z" fill="#64ffda"/></symbol>
-            <symbol id="spr-laser" viewBox="0 0 8 16"><path d="M4 1l2.6 3.6L2.8 8l3 3.4L2.4 15" fill="none" stroke="#ff7ab0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-            <symbol id="spr-boom" viewBox="0 0 40 40" overflow="visible"><path d="M20 3v9M20 28v9M3 20h9M28 20h9M8.2 8.2l6.4 6.4M25.4 25.4l6.4 6.4M31.8 8.2l-6.4 6.4M14.6 25.4l-6.4 6.4" fill="none" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="20" r="5.5" fill="#ff8c42"/></symbol>
-          </defs>
-          <g id="stars"></g>
-          <line class="defense-line" x1="0" y1="410" x2="640" y2="410"></line>
-          <g id="alienLayer"></g>
-          <g id="ufoLayer"></g>
-          <g id="laserLayer"></g>
-          <g id="bulletLayer"></g>
-          <g id="shipLayer"></g>
-          <g id="fxLayer"></g>
-        </svg>
+        <canvas id="gameCanvas" aria-hidden="true"></canvas>
         <div class="wave-banner" id="waveBanner" aria-hidden="true"><span id="waveBannerText">WAVE 1</span></div>
         <div class="game-overlay show" id="overlayStart">
           <div class="overlay-card">
             <p class="overlay-kicker">&gt; incoming transmission_</p>
             <h3 class="overlay-title">Alien <span>Invaders</span></h3>
-            <p class="overlay-text">They came from deep space. You are the last ship on the line.</p>
+            <p class="overlay-text">They came from deep space. You are the last ship on the line. Grab power-ups, chain combos, survive the waves.</p>
             <div class="overlay-controls">
               <span><kbd>&larr;</kbd><kbd>&rarr;</kbd> move</span>
               <span><kbd>Space</kbd> shoot</span>
               <span><kbd>P</kbd> pause</span>
-              <span>touch: drag to move &amp; fire</span>
+              <span>touch: on-screen controls</span>
             </div>
             <button class="btn btn-gradient" id="btnStart" type="button"><i class="bi bi-play-fill me-1" aria-hidden="true"></i>Start Mission</button>
             <p class="overlay-high">High score: <strong id="startHigh">0</strong></p>
@@ -440,14 +443,21 @@
             <p class="overlay-kicker">&gt; signal lost_</p>
             <h3 class="overlay-title">Game <span>Over</span></h3>
             <p class="overlay-text" id="overReason">The invaders broke through.</p>
-            <p class="overlay-score">Score <strong id="overScore">0</strong> &middot; Best <strong id="overHigh">0</strong></p>
+            <p class="overlay-score">Score <strong id="overScore">0</strong> &middot; Best <strong id="overHigh">0</strong> &middot; Wave <strong id="overWave">1</strong></p>
             <p class="new-best" id="overBest" hidden><i class="bi bi-trophy-fill me-1" aria-hidden="true"></i>New high score!</p>
             <button class="btn btn-gradient" id="btnRetry" type="button"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Play Again</button>
           </div>
         </div>
       </div>
+      <div class="touch-controls" id="touchControls">
+        <div class="touch-group">
+          <button class="touch-btn" id="touchLeft" type="button" aria-label="Move ship left"><i class="bi bi-arrow-left" aria-hidden="true"></i></button>
+          <button class="touch-btn" id="touchRight" type="button" aria-label="Move ship right"><i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+        </div>
+        <button class="touch-btn touch-fire" id="touchFire" type="button" aria-label="Fire"><i class="bi bi-lightning-charge-fill" aria-hidden="true"></i> Fire</button>
+      </div>
       <div class="game-foot">
-        <span><i class="bi bi-controller me-1" aria-hidden="true"></i>Keyboard &amp; touch supported &middot; no libraries, just SVG</span>
+        <span><i class="bi bi-controller me-1" aria-hidden="true"></i>60 fps fixed-timestep engine &middot; zero libraries</span>
         <a href="https://github.com/rbndict/rbndict.github.io/blob/main/game.js" target="_blank" rel="noopener">View source <i class="bi bi-github ms-1" aria-hidden="true"></i></a>
       </div>
     </div>
@@ -456,7 +466,7 @@
 
 <section id="contact" class="section">
   <div class="container contact-wrap">
-    <h2 class="section-heading reveal"><span class="num">06.</span>Get In Touch</h2>
+    <h2 class="section-heading reveal"><span class="num">07.</span>Get In Touch</h2>
     <p class="contact-lead reveal">The fastest way to reach me is email — I read it daily and reply quickly. Instagram and Facebook work too.</p>
     <div class="row g-4">
       <div class="col-md-4">
