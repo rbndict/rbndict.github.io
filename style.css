@@ -1294,3 +1294,62 @@ body.has-touch .touch-controls { display: flex; }
 @media (prefers-reduced-motion: reduce) {
   .stat-tile, .lang-fill { transition: none; }
 }
+
+/* ---------- Mobile bottom navigation bar ---------- */
+.bottom-nav {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  /* Hide the desktop-style top nav; collapse the toggler out of the way */
+  .navbar-collapse { display: none !important; }
+  .navbar-toggler { display: none !important; }
+
+  .bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1040;
+    display: flex;
+    width: 100%;
+    height: 56px;
+    align-items: stretch;
+    justify-content: space-around;
+    background: var(--nav-bg);
+    border-top: 1px solid var(--stroke);
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .bottom-nav-btn {
+    flex: 1 1 0;
+    min-width: 48px;      /* even spacing on narrow screens */
+    min-height: 48px;     /* accessible touch target (48x48) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    color: var(--text, inherit);
+    text-decoration: none;
+    font-size: 0.65rem;
+    line-height: 1;
+    transition: color 0.2s var(--ease);
+  }
+
+  .bottom-nav-btn i { font-size: 1.25rem; }
+
+  .bottom-nav-btn:hover,
+  .bottom-nav-btn:focus-visible { color: var(--accent); }
+
+  .bottom-nav-btn.active { color: var(--accent); }
+  .bottom-nav-btn.active i { transform: translateY(-1px); }
+
+  /* keep page content clear of the fixed bar */
+  body { padding-bottom: 56px; }
+  .footer { padding-bottom: 4.5rem; }
+  .scroll-hint { bottom: 4.5rem; }
+}

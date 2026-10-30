@@ -246,6 +246,22 @@
     }
   })();
 
+  const tabLinks = Array.prototype.slice.call(document.querySelectorAll('.bottom-nav-btn[data-spy]'));
+  const spyTargets = tabLinks
+    .map(function (a) { return document.querySelector(a.getAttribute('data-spy')); })
+    .filter(Boolean);
+  if ('IntersectionObserver' in window && spyTargets.length) {
+    var tabSpy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        tabLinks.forEach(function (a) {
+          a.classList.toggle('active', a.getAttribute('data-spy') === '#' + entry.target.id);
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    spyTargets.forEach(function (s) { tabSpy.observe(s); });
+  }
+
   const navLinks = Array.prototype.slice.call(document.querySelectorAll('#navMenu .nav-link[href^="#"]'));
   if ('IntersectionObserver' in window && navLinks.length) {
     const sections = navLinks
